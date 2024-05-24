@@ -18,6 +18,11 @@ retrofit2Adapter = "2.1.0"
 gsonVersion = "2.9.0"
 lifeCycleVersion= "2.8.0"
 picassoVersion= "2.8"
+okHttpLoggingInterceptorVersion= "4.9.3"
+dagger2Version= "2.50"
+workManagerVersion= "2.9.0"
+fragmentVersion= "1.7.1"
+rxJavaAdaperVersion= "2.9.0"
 
 
 [libraries]
@@ -27,11 +32,18 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-rx-android = { group = "io.reactivex.rxjava2", name = "rxandroid", version.ref = "rxandroidVersion" }
 androidx-rxjava2 = { group = "io.reactivex.rxjava2", name = "rxjava", version.ref = "rxjava2Version" }
 androidx-retrofit2-adapter = { group = "com.squareup.retrofit2", name = "adapter-rxjava", version.ref = "retrofit2Adapter" }
+androidx-rxjava2-adapter= { group = "com.squareup.retrofit2", name = "adapter-rxjava2", version.ref = "rxJavaAdaperVersion" }
 androidx-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "gsonVersion" }
-androidx-view-model = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifeCycleVersion" }
+androidx-view-model-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifeCycleVersion" }
 androidx-view-model-savedstate = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "lifeCycleVersion" }
 androidx-annotation-processor = { group = "androidx.lifecycle", name = "lifecycle-compiler", version.ref = "lifeCycleVersion" }
+androidx-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifeCycleVersion" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentVersion" }
 picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picassoVersion" }
+okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttpLoggingInterceptorVersion" }
+dagger2 = { group = "com.google.dagger", name = "dagger", version.ref = "dagger2Version" }
+dagger2-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger2Version" }
+work-manager = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workManagerVersion" }
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
