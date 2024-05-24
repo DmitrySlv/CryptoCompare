@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class CoinInfoNameContainer(
     @SerializedName("CoinInfo")
-    val data: CoinName? = null
+    val coinInfo: CoinName? = null
 )
