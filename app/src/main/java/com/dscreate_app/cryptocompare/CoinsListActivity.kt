@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dscreate_app.cryptocompare.adapter.CoinAdapter
 import com.dscreate_app.cryptocompare.databinding.ActivityCoinListBinding
+import com.dscreate_app.cryptocompare.models.CoinInfo
 
 class CoinsListActivity : AppCompatActivity() {
 
@@ -17,11 +20,21 @@ class CoinsListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        viewModel.priceList.observe(this) {
-            Log.d("CoinsListActivity", it.toString())
+        init()
+    }
+
+    private fun init() = with(binding) {
+        val adapter = CoinAdapter()
+        rvCoinPriceList.layoutManager = LinearLayoutManager(this@CoinsListActivity)
+        rvCoinPriceList.adapter = adapter
+        rvCoinPriceList.itemAnimator = null
+        viewModel.priceList.observe(this@CoinsListActivity) {
+            adapter.submitList(it)
         }
-        viewModel.getDetailInfo("BTC").observe(this) {
-            Log.d("CoinsListActivity", it.toString())
+        adapter.onCoinClickListener = object : CoinAdapter.OnCoinClickListener {
+            override fun onCoinClick(coinInfo: CoinInfo) {
+                Log.d("CoinsListActivity", coinInfo.fromSymbol)
+            }
         }
     }
 }

@@ -38,7 +38,6 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             .subscribe({
                 db.getDao().insertPriceList(it)
             }, { throwable ->
-                Log.d("MyLog", throwable.message.toString())
             })
         compositeDisposable.add(disposable)
     }
