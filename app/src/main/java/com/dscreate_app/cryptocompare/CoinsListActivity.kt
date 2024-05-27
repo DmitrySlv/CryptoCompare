@@ -33,7 +33,8 @@ class CoinsListActivity : AppCompatActivity() {
         }
         adapter.onCoinClickListener = object : CoinAdapter.OnCoinClickListener {
             override fun onCoinClick(coinInfo: CoinInfo) {
-                Log.d("CoinsListActivity", coinInfo.fromSymbol)
+                val intent = CoinDetailActivity.newIntent(this@CoinsListActivity, coinInfo.fromSymbol)
+                startActivity(intent)
             }
         }
     }
