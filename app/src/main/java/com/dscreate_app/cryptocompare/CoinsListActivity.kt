@@ -17,8 +17,10 @@ class CoinsListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        viewModel.loadData()
         viewModel.priceList.observe(this) {
+            Log.d("CoinsListActivity", it.toString())
+        }
+        viewModel.getDetailInfo("BTC").observe(this) {
             Log.d("CoinsListActivity", it.toString())
         }
     }
