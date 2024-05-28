@@ -1,7 +1,5 @@
 package com.dscreate_app.cryptocompare.data.network.models
 
-import com.dscreate_app.cryptocompare.data.network.ApiFactory.BASE_IMAGE_URL
-import com.dscreate_app.cryptocompare.presentation.utils.convertTime
 import com.google.gson.annotations.SerializedName
 
 data class CoinInfoDto(
@@ -10,30 +8,23 @@ data class CoinInfoDto(
     val fromSymbol: String,
 
     @SerializedName("TOSYMBOL")
-    val toSymbol: String,
+    val toSymbol: String?,
 
     @SerializedName("PRICE")
-    val price: String,
+    val price: String?,
 
     @SerializedName("LASTUPDATE")
-    val lastUpdate: Long,
+    val lastUpdate: Long?,
 
     @SerializedName("HIGHDAY")
-    val highDay: Double,
+    val highDay: Double?,
 
     @SerializedName("LOWDAY")
-    val lowDay: Double,
+    val lowDay: Double?,
 
     @SerializedName("LASTMARKET")
-    val lastMarket: String,
+    val lastMarket: String?,
 
     @SerializedName("IMAGEURL")
     val imageUrl: String
-) {
-    fun getFormattedTime(): String {
-        return convertTime(lastUpdate)
-    }
-    fun getFullImageUrl(): String {
-        return BASE_IMAGE_URL + imageUrl
-    }
-}
+)

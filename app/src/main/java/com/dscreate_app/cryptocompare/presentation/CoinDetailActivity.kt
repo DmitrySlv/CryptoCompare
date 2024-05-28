@@ -35,8 +35,8 @@ class CoinDetailActivity : AppCompatActivity() {
             tvMinPrice.text = it.lowDay.toString()
             tvMaxPrice.text = it.highDay.toString()
             tvLastMarket.text = it.lastMarket
-            tvLastUpdate.text = it.getFormattedTime()
-            Picasso.get().load(it.getFullImageUrl()).into(ivLogoCoin)
+            tvLastUpdate.text = it.lastUpdate
+            Picasso.get().load(it.imageUrl).into(ivLogoCoin)
         }
     }
 

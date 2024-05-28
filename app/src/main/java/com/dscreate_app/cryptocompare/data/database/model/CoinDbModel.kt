@@ -12,22 +12,22 @@ data class CoinDbModel(
     val fromSymbol: String,
 
     @SerializedName("TOSYMBOL")
-    val toSymbol: String,
+    val toSymbol: String?,
 
     @SerializedName("PRICE")
-    val price: String,
+    val price: String?,
 
     @SerializedName("LASTUPDATE")
-    val lastUpdate: Long,
+    val lastUpdate: Long?,
 
     @SerializedName("HIGHDAY")
-    val highDay: Double,
+    val highDay: Double?,
 
     @SerializedName("LOWDAY")
-    val lowDay: Double,
+    val lowDay: Double?,
 
     @SerializedName("LASTMARKET")
-    val lastMarket: String,
+    val lastMarket: String?,
 
     @SerializedName("IMAGEURL")
     val imageUrl: String
