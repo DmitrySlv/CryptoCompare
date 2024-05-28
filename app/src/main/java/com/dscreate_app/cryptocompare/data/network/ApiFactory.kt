@@ -1,4 +1,4 @@
-package com.dscreate_app.cryptocompare.network
+package com.dscreate_app.cryptocompare.data.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

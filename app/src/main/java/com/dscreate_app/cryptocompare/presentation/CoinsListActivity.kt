@@ -1,13 +1,12 @@
-package com.dscreate_app.cryptocompare
+package com.dscreate_app.cryptocompare.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dscreate_app.cryptocompare.adapter.CoinAdapter
+import com.dscreate_app.cryptocompare.presentation.adapter.CoinAdapter
 import com.dscreate_app.cryptocompare.databinding.ActivityCoinListBinding
-import com.dscreate_app.cryptocompare.models.CoinInfo
+import com.dscreate_app.cryptocompare.data.network.models.CoinInfoDto
 
 class CoinsListActivity : AppCompatActivity() {
 
@@ -32,8 +31,9 @@ class CoinsListActivity : AppCompatActivity() {
             adapter.submitList(it)
         }
         adapter.onCoinClickListener = object : CoinAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinInfo: CoinInfo) {
-                val intent = CoinDetailActivity.newIntent(this@CoinsListActivity, coinInfo.fromSymbol)
+            override fun onCoinClick(coinInfoDto: CoinInfoDto) {
+                val intent =
+                    CoinDetailActivity.newIntent(this@CoinsListActivity, coinInfoDto.fromSymbol)
                 startActivity(intent)
             }
         }

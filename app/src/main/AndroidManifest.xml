@@ -15,10 +15,10 @@
         android:theme="@style/Theme.CryptoCompare"
         tools:targetApi="31">
         <activity
-            android:name=".CoinDetailActivity"
+            android:name=".presentation.CoinDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".CoinsListActivity"
+            android:name=".presentation.CoinsListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

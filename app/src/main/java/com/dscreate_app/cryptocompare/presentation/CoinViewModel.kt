@@ -1,13 +1,12 @@
-package com.dscreate_app.cryptocompare
+package com.dscreate_app.cryptocompare.presentation
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.dscreate_app.cryptocompare.database.AppDatabase
-import com.dscreate_app.cryptocompare.models.CoinInfo
-import com.dscreate_app.cryptocompare.models.CoinInfoContainer
-import com.dscreate_app.cryptocompare.network.ApiFactory
+import com.dscreate_app.cryptocompare.data.database.AppDatabase
+import com.dscreate_app.cryptocompare.data.network.models.CoinInfoDto
+import com.dscreate_app.cryptocompare.data.network.models.CoinInfoContainerDto
+import com.dscreate_app.cryptocompare.data.network.ApiFactory
 import com.google.gson.Gson
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -20,7 +19,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
     val priceList = db.getDao().getPriceList()
 
-    fun getDetailInfo(fSym: String): LiveData<CoinInfo> = db.getDao().getFullInfoAboutCoin(fSym)
+    fun getDetailInfo(fSym: String): LiveData<CoinInfoDto> = db.getDao().getFullInfoAboutCoin(fSym)
 
     init {
         loadData()
@@ -42,8 +41,8 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
         compositeDisposable.add(disposable)
     }
 
-    private fun getCurrencyJson(coinPriceInfo: CoinInfoContainer): List<CoinInfo> {
-        val result = mutableListOf<CoinInfo>()
+    private fun getCurrencyJson(coinPriceInfo: CoinInfoContainerDto): List<CoinInfoDto> {
+        val result = mutableListOf<CoinInfoDto>()
         val jsonObject = coinPriceInfo.json ?: return result
         val coinKeySet = jsonObject.keySet()
         for (coinKey in coinKeySet) {
@@ -52,7 +51,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             for (currencyKey in currencyKeySet) {
                 val coinPrice = Gson().fromJson(
                     currencyJson.getAsJsonObject(currencyKey),
-                    CoinInfo::class.java
+                    CoinInfoDto::class.java
                 )
                 result.add(coinPrice)
             }

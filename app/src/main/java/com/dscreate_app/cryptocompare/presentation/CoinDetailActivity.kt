@@ -1,4 +1,4 @@
-package com.dscreate_app.cryptocompare
+package com.dscreate_app.cryptocompare.presentation
 
 import android.content.Context
 import android.content.Intent

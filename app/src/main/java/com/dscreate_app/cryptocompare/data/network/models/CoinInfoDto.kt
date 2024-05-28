@@ -1,15 +1,11 @@
-package com.dscreate_app.cryptocompare.models
+package com.dscreate_app.cryptocompare.data.network.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.dscreate_app.cryptocompare.network.ApiFactory.BASE_IMAGE_URL
-import com.dscreate_app.cryptocompare.utils.convertTime
+import com.dscreate_app.cryptocompare.data.network.ApiFactory.BASE_IMAGE_URL
+import com.dscreate_app.cryptocompare.presentation.utils.convertTime
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "full_price_list")
-data class CoinInfo(
+data class CoinInfoDto(
 
-    @PrimaryKey
     @SerializedName("FROMSYMBOL")
     val fromSymbol: String,
 

@@ -1,7 +1,7 @@
-package com.dscreate_app.cryptocompare.network
+package com.dscreate_app.cryptocompare.data.network
 
-import com.dscreate_app.cryptocompare.models.CoinInfoContainer
-import com.dscreate_app.cryptocompare.models.CoinInfoList
+import com.dscreate_app.cryptocompare.data.network.models.CoinInfoContainerDto
+import com.dscreate_app.cryptocompare.data.network.models.CoinInfoListDto
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,14 +13,14 @@ interface ApiService {
         @Query(API_KEY) apiKey: String = API_KEY,
         @Query(QUERY_PARAM_LIMIT) limit: Int = LIMIT,
         @Query(QUERY_PARAM_TSYM) tSym: String = CURRENCY
-    ): Single<CoinInfoList>
+    ): Single<CoinInfoListDto>
 
     @GET("pricemultifull")
     fun getFullInfoAboutCoin(
         @Query(API_KEY) apiKey: String = API_KEY,
         @Query(QUERY_PARAM_FSYMS) fSyms: String,
         @Query(QUERY_PARAM_TSYMS) tSyms: String = CURRENCY
-    ): Single<CoinInfoContainer>
+    ): Single<CoinInfoContainerDto>
 
     companion object {
         private const val QUERY_PARAM_LIMIT = "limit"

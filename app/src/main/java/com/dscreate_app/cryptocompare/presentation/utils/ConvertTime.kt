@@ -1,4 +1,4 @@
-package com.dscreate_app.cryptocompare.utils
+package com.dscreate_app.cryptocompare.presentation.utils
 
 import java.sql.Timestamp
 import java.text.SimpleDateFormat

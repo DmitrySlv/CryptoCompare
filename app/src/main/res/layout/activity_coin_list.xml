@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D1D0D0"
-    tools:context=".CoinsListActivity">
+    tools:context=".presentation.CoinsListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCoinPriceList"

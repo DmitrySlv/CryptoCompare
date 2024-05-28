@@ -1,12 +1,13 @@
-package com.dscreate_app.cryptocompare.database
+package com.dscreate_app.cryptocompare.data.database
 
 import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.dscreate_app.cryptocompare.models.CoinInfo
+import com.dscreate_app.cryptocompare.data.database.model.CoinDbModel
+import com.dscreate_app.cryptocompare.data.network.models.CoinInfoDto
 
-@Database(entities = [CoinInfo::class], version = 1, exportSchema = false)
+@Database(entities = [CoinDbModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
