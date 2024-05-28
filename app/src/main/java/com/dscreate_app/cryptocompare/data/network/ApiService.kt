@@ -2,25 +2,24 @@ package com.dscreate_app.cryptocompare.data.network
 
 import com.dscreate_app.cryptocompare.data.network.models.CoinInfoContainerDto
 import com.dscreate_app.cryptocompare.data.network.models.CoinInfoListDto
-import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
 
     @GET("top/totalvolfull")
-    fun getTopCoinsInfo(
+   suspend fun getTopCoinsInfo(
         @Query(API_KEY) apiKey: String = API_KEY,
         @Query(QUERY_PARAM_LIMIT) limit: Int = LIMIT,
         @Query(QUERY_PARAM_TSYM) tSym: String = CURRENCY
-    ): Single<CoinInfoListDto>
+    ): CoinInfoListDto
 
     @GET("pricemultifull")
-    fun getFullInfoAboutCoin(
+    suspend fun getFullInfoAboutCoin(
         @Query(API_KEY) apiKey: String = API_KEY,
         @Query(QUERY_PARAM_FSYMS) fSyms: String,
         @Query(QUERY_PARAM_TSYMS) tSyms: String = CURRENCY
-    ): Single<CoinInfoContainerDto>
+    ): CoinInfoContainerDto
 
     companion object {
         private const val QUERY_PARAM_LIMIT = "limit"

@@ -7,15 +7,21 @@ import com.dscreate_app.cryptocompare.data.database.AppDatabase
 import com.dscreate_app.cryptocompare.data.network.models.CoinInfoDto
 import com.dscreate_app.cryptocompare.data.network.models.CoinInfoContainerDto
 import com.dscreate_app.cryptocompare.data.network.ApiFactory
+import com.dscreate_app.cryptocompare.domain.usecases.GetCoinInfoListUseCase
+import com.dscreate_app.cryptocompare.domain.usecases.GetCoinInfoUseCase
+import com.dscreate_app.cryptocompare.domain.usecases.LoadDataUseCase
 import com.google.gson.Gson
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class CoinViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val compositeDisposable = CompositeDisposable()
     private val db = AppDatabase.getInstance(application)
+
+
+    private val getCoinInfoUseCase = GetCoinInfoUseCase(repository)
+    private val getCoinInfoListUseCase = GetCoinInfoListUseCase(repository)
+    private val loadData = LoadDataUseCase(repository)
 
     val priceList = db.getDao().getPriceList()
 
@@ -38,7 +44,6 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
                 db.getDao().insertPriceList(it)
             }, { throwable ->
             })
-        compositeDisposable.add(disposable)
     }
 
     private fun getCurrencyJson(coinPriceInfo: CoinInfoContainerDto): List<CoinInfoDto> {
@@ -57,10 +62,5 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
         return result
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
     }
 }

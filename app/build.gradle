@@ -40,15 +40,11 @@ android {
 dependencies {
     //Room
     implementation libs.androidx.room
-    implementation libs.androidx.room.rxjava2
     ksp libs.androidx.room.compiler
-    //RxJava2 & Retrofit2 & OkHttp3
-    implementation libs.androidx.rx.android
-    implementation libs.androidx.rxjava2
+    //Retrofit2 & OkHttp3
     implementation libs.androidx.retrofit2.adapter
     implementation libs.androidx.gson
     implementation libs.okhttp3.logging.interceptor
-    implementation libs.androidx.rxjava2.adapter
     //ViewModel
     implementation libs.androidx.view.model.savedstate
     implementation libs.androidx.view.model.ktx
