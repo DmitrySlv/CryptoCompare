@@ -4,12 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.dscreate_app.cryptocompare.R
 import com.dscreate_app.cryptocompare.databinding.ActivityCoinDetailBinding
-import com.dscreate_app.cryptocompare.presentation.CoinViewModel
 import com.dscreate_app.cryptocompare.presentation.fragments.CoinDetailFragment
-import com.squareup.picasso.Picasso
 
 class CoinDetailActivity : AppCompatActivity() {
 

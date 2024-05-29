@@ -1,14 +1,18 @@
 package com.dscreate_app.cryptocompare.presentation.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.dscreate_app.cryptocompare.CoinApp
 import com.dscreate_app.cryptocompare.databinding.FragmentCoinDetailBinding
-import com.dscreate_app.cryptocompare.presentation.CoinViewModel
+import com.dscreate_app.cryptocompare.presentation.view_models.CoinViewModel
+import com.dscreate_app.cryptocompare.presentation.view_models.ViewModelFactory
 import com.squareup.picasso.Picasso
+import javax.inject.Inject
 
 class CoinDetailFragment : Fragment() {
 
@@ -16,7 +20,21 @@ class CoinDetailFragment : Fragment() {
     private val binding: FragmentCoinDetailBinding
         get() = _binding ?: throw RuntimeException("CoinDetailFragment is null")
 
-    private val viewModel: CoinViewModel by viewModels()
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[CoinViewModel::class.java]
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as CoinApp).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
