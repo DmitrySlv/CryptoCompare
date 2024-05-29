@@ -1,12 +1,15 @@
-package com.dscreate_app.cryptocompare.presentation
+package com.dscreate_app.cryptocompare.presentation.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dscreate_app.cryptocompare.R
 import com.dscreate_app.cryptocompare.databinding.ActivityCoinListBinding
 import com.dscreate_app.cryptocompare.domain.model.CoinInfoEntity
+import com.dscreate_app.cryptocompare.presentation.CoinViewModel
 import com.dscreate_app.cryptocompare.presentation.adapter.CoinAdapter
+import com.dscreate_app.cryptocompare.presentation.fragments.CoinDetailFragment
 
 class CoinsListActivity : AppCompatActivity() {
 
@@ -32,10 +35,27 @@ class CoinsListActivity : AppCompatActivity() {
         }
         adapter.onCoinClickListener = object : CoinAdapter.OnCoinClickListener {
             override fun onCoinClick(coinInfo: CoinInfoEntity) {
-                val intent =
-                    CoinDetailActivity.newIntent(this@CoinsListActivity, coinInfo.fromSymbol)
-                startActivity(intent)
+                if (isOnePaneMode()) {
+                    launchCoinDetailActivity(coinInfo)
+                } else {
+                    launchCoinDetailFragment(coinInfo)
+                }
             }
         }
+    }
+
+    private fun isOnePaneMode() = binding.fragmentContainer == null
+
+    private fun launchCoinDetailActivity(coinInfo: CoinInfoEntity) {
+        val intent = CoinDetailActivity.newIntent(this, coinInfo.fromSymbol)
+        startActivity(intent)
+    }
+
+    private fun launchCoinDetailFragment(coinInfo: CoinInfoEntity) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, CoinDetailFragment.newInstance(coinInfo.fromSymbol))
+            .addToBackStack(null)
+            .commit()
     }
 }

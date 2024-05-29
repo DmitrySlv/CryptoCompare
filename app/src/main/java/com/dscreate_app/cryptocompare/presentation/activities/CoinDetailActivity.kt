@@ -1,42 +1,33 @@
-package com.dscreate_app.cryptocompare.presentation
+package com.dscreate_app.cryptocompare.presentation.activities
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.dscreate_app.cryptocompare.R
 import com.dscreate_app.cryptocompare.databinding.ActivityCoinDetailBinding
+import com.dscreate_app.cryptocompare.presentation.CoinViewModel
+import com.dscreate_app.cryptocompare.presentation.fragments.CoinDetailFragment
 import com.squareup.picasso.Picasso
 
 class CoinDetailActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityCoinDetailBinding.inflate(layoutInflater) }
 
-    private val viewModel by lazy {
-        ViewModelProvider(this)[CoinViewModel::class.java]
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        init()
-    }
 
-    private fun init() = with(binding) {
         if (!intent.hasExtra(EXTRA_FROM_SYMBOL)) {
             finish()
             return
         }
         val fSymbol = intent.getStringExtra(EXTRA_FROM_SYMBOL) ?: EMPTY_SYMBOL
-        viewModel.getDetailInfo(fSymbol).observe(this@CoinDetailActivity) {
-            tvFromSymbol.text = it.fromSymbol
-            tvToSymbol.text = it.toSymbol
-            tvPrice.text = it.price
-            tvMinPrice.text = it.lowDay.toString()
-            tvMaxPrice.text = it.highDay.toString()
-            tvLastMarket.text = it.lastMarket
-            tvLastUpdate.text = it.lastUpdate
-            Picasso.get().load(it.imageUrl).into(ivLogoCoin)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, CoinDetailFragment.newInstance(fSymbol))
+                .commit()
         }
     }
 
