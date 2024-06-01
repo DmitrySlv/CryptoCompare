@@ -8,7 +8,13 @@ import dagger.BindsInstance
 import dagger.Component
 
 @ApplicationScope
-@Component(modules = [DataModule::class, ViewModelModule::class])
+@Component(
+    modules = [
+        DataModule::class,
+        ViewModelModule::class,
+        WorkerModule::class
+    ]
+)
 interface ApplicationComponent {
 
     fun inject(application: CoinApp)
@@ -18,7 +24,7 @@ interface ApplicationComponent {
     @Component.Factory
     interface Factory {
         fun create(
-            @BindsInstance application: Application
+            @BindsInstance application: Application,
         ): ApplicationComponent
     }
 }

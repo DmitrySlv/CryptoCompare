@@ -4,15 +4,11 @@ import android.content.Context
 import androidx.work.ListenableWorker
 import androidx.work.WorkerFactory
 import androidx.work.WorkerParameters
-import com.dscreate_app.cryptocompare.data.database.CoinMapper
-import com.dscreate_app.cryptocompare.data.database.Dao
-import com.dscreate_app.cryptocompare.data.network.ApiService
 import javax.inject.Inject
+import javax.inject.Provider
 
 class WorkersFactory @Inject constructor (
-    private val dao: Dao,
-    private val mapper: CoinMapper,
-    private val apiService: ApiService
+    private val workerProvider: @JvmSuppressWildcards Map<Class<out ListenableWorker>, Provider<ChildWorkerFactory>>
 ): WorkerFactory() {
 
     override fun createWorker(
@@ -20,6 +16,12 @@ class WorkersFactory @Inject constructor (
         workerClassName: String,
         workerParameters: WorkerParameters,
     ): ListenableWorker? {
-        return RefreshDataWorker(appContext, workerParameters, dao, mapper, apiService)
+        return when(workerClassName) {
+            RefreshDataWorker::class.qualifiedName -> {
+               val childWorkerFactory = workerProvider[RefreshDataWorker::class.java]?.get()
+                return childWorkerFactory?.create(appContext, workerParameters)
+            }
+            else -> null
+        }
     }
 }

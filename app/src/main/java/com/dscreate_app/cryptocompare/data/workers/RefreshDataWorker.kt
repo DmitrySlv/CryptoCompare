@@ -2,6 +2,7 @@ package com.dscreate_app.cryptocompare.data.workers
 
 import android.content.Context
 import androidx.work.CoroutineWorker
+import androidx.work.ListenableWorker
 import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkerParameters
@@ -11,7 +12,7 @@ import com.dscreate_app.cryptocompare.data.network.ApiService
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
-class RefreshDataWorker @Inject constructor (
+class RefreshDataWorker(
     context: Context,
     params: WorkerParameters,
     private val dao: Dao,
@@ -31,6 +32,16 @@ class RefreshDataWorker @Inject constructor (
             } catch (e: Exception) {
             }
             delay(10000)
+        }
+    }
+
+    class Factory @Inject constructor (
+        private val dao: Dao,
+        private val mapper: CoinMapper,
+        private val apiService: ApiService
+    ): ChildWorkerFactory {
+        override fun create(context: Context, params: WorkerParameters): ListenableWorker {
+            return RefreshDataWorker(context, params, dao, mapper, apiService)
         }
     }
 
