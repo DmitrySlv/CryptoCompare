@@ -9,7 +9,7 @@ import com.dscreate_app.cryptocompare.data.database.Dao
 import com.dscreate_app.cryptocompare.data.network.ApiService
 import javax.inject.Inject
 
-class WorkersFactory (
+class WorkersFactory @Inject constructor (
     private val dao: Dao,
     private val mapper: CoinMapper,
     private val apiService: ApiService
