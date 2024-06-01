@@ -1,30 +1,30 @@
 package com.dscreate_app.cryptocompare.data.workers
 
-import android.app.Application
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkerParameters
-import com.dscreate_app.cryptocompare.data.database.AppDatabase
 import com.dscreate_app.cryptocompare.data.database.CoinMapper
-import com.dscreate_app.cryptocompare.data.network.ApiFactory
+import com.dscreate_app.cryptocompare.data.database.Dao
+import com.dscreate_app.cryptocompare.data.network.ApiService
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
-class RefreshDataWorker(
+class RefreshDataWorker @Inject constructor (
     context: Context,
     params: WorkerParameters,
+    private val dao: Dao,
+    private val mapper: CoinMapper,
+    private val apiService: ApiService
 ) : CoroutineWorker(context, params) {
-
-    private val dao = AppDatabase.getInstance(context as Application).getDao()
-    private val mapper = CoinMapper()
 
     override suspend fun doWork(): Result {
         while (true) {
             try {
-                val topCoinsList = ApiFactory.apiService.getTopCoinsInfo(limit = 20)
+                val topCoinsList = apiService.getTopCoinsInfo(limit = 20)
                 val fSymbol = mapper.mapCoinNamesListDtoToString(topCoinsList)
-                val jsonContainer = ApiFactory.apiService.getFullInfoAboutCoin(fSyms = fSymbol)
+                val jsonContainer = apiService.getFullInfoAboutCoin(fSyms = fSymbol)
                 val coinsNamesList = mapper.mapJsonContainerToCoinListDto(jsonContainer)
                 val coinDbModel = coinsNamesList.map { mapper.mapCoinDtoToCoinDbModel(it) }
                 dao.insertPriceList(coinDbModel)
