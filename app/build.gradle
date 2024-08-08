@@ -46,6 +46,7 @@ dependencies {
     implementation libs.androidx.rx.android
     implementation libs.androidx.rxjava2
     implementation libs.androidx.retrofit2.adapter
+    implementation libs.androidx.okhttp3
     implementation libs.androidx.gson
     //ViewModel
     implementation libs.androidx.view.model.savedstate

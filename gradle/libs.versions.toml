@@ -14,7 +14,8 @@ roomVersion = "2.6.1"
 compilerKspVersion = "2.0.0-1.0.21"
 rxandroidVersion = "2.1.1"
 rxjava2Version = "2.2.13"
-retrofit2Adapter = "2.1.0"
+retrofit2Adapter = "2.9.0"
+okhttp3Version = "4.9.3"
 gsonVersion = "2.9.0"
 lifeCycleVersion= "2.8.0"
 picassoVersion= "2.8"
@@ -26,7 +27,8 @@ androidx-room-rxjava2 = { group = "androidx.room", name = "room-rxjava2", versio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
 androidx-rx-android = { group = "io.reactivex.rxjava2", name = "rxandroid", version.ref = "rxandroidVersion" }
 androidx-rxjava2 = { group = "io.reactivex.rxjava2", name = "rxjava", version.ref = "rxjava2Version" }
-androidx-retrofit2-adapter = { group = "com.squareup.retrofit2", name = "adapter-rxjava", version.ref = "retrofit2Adapter" }
+androidx-retrofit2-adapter = { group = "com.squareup.retrofit2", name = "adapter-rxjava2", version.ref = "retrofit2Adapter" }
+androidx-okhttp3 = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3Version" }
 androidx-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "gsonVersion" }
 androidx-view-model = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifeCycleVersion" }
 androidx-view-model-savedstate = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "lifeCycleVersion" }

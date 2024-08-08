@@ -2,7 +2,6 @@ package com.dscreate_app.cryptocompare.models
 
 import com.google.gson.annotations.SerializedName
 
-data class CoinName(
-    @SerializedName("Name")
-    val name: String
+data class CoinInfoContainerDto(
+    @SerializedName("CoinInfo") val coinName: CoinNameDto? = null
 )
