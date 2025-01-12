@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compiler.ksp)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -30,10 +32,33 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+    //Room
+    implementation libs.androidx.room
+    ksp libs.androidx.room.compiler
+    //Retrofit2 & OkHttp3
+    implementation libs.androidx.retrofit2.adapter
+    implementation libs.androidx.gson
+    implementation libs.okhttp3.logging.interceptor
+    //ViewModel
+    implementation libs.androidx.view.model.savedstate
+    implementation libs.androidx.view.model.ktx
+    implementation libs.androidx.livedata.ktx
+    kapt libs.androidx.annotation.processor
+    //Picasso
+    implementation libs.picasso
+    //Dagger2
+    implementation libs.dagger2
+    kapt libs.dagger2.compiler
+    //WorkManager
+    implementation libs.work.manager
 
+    implementation libs.androidx.fragment.ktx
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
